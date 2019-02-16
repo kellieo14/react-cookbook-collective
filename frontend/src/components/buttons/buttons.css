@@ -1,0 +1,64 @@
+.recipe-button {
+    background-color:white;
+    border: 1px solid rgb(32, 36, 36);
+    color: rgb(32, 36, 36);
+}
+
+.recipe-button:hover {
+    background-color:rgb(32, 36, 36);
+    border: 1px solid white;
+    color: white;
+}
+
+.edit-icon-button {
+    background-color:white;
+    border: 1px solid rgb(32, 36, 36);
+    color: rgb(32, 36, 36);
+    margin: 15px;
+}
+
+.edit-icon-button:hover {
+    background-color:rgb(32, 36, 36);
+    border: 1px solid white;
+    color: white;
+}
+
+.delete-icon-button {
+    background-color:white;
+    border: 1px solid rgb(32, 36, 36);
+    color: rgb(32, 36, 36);
+    margin: 15px;
+}
+
+.delete-icon-button:hover {
+    background-color:rgb(32, 36, 36);
+    border: 1px solid white;
+    color: white;
+}
+
+.add-icon-button {
+    background-color:white;
+    border: 1px solid rgb(32, 36, 36);
+    color: rgb(32, 36, 36);
+    margin: 15px;
+}
+
+.add-icon-button:hover {
+    background-color:rgb(32, 36, 36);
+    border: 1px solid white;
+    color: white;
+}
+
+.save-icon-button {
+    background-color:white;
+    border: 1px solid rgb(32, 36, 36);
+    color: rgb(32, 36, 36);
+    margin: 15px;
+}
+
+.save-icon-button:hover {
+    background-color:rgb(32, 36, 36);
+    border: 1px solid white;
+    color: white;
+}
+

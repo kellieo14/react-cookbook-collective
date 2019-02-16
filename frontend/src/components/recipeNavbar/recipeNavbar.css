@@ -1,0 +1,19 @@
+.navbar-link {
+    color: white
+}
+
+.navbar-link:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.dropdown-link {
+    margin: 0;
+    padding: 10px;
+    color: rgb(32, 36, 36);
+}
+.dropdown-link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
