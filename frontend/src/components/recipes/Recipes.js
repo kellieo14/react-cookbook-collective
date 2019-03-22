@@ -18,7 +18,10 @@ class Recipes extends Component {
 
     async componentDidMount() {
         this._isMounted = true;
-        await axios.get('http://localhost:8081/recipes')
+        await axios.get('http://localhost:8081/recipes', 
+        {
+            headers: { Authorization: `JWT ${localStorage.getItem('jwt')}`}
+        })
         .then(recipes => {
             if (this._isMounted) {
                 this.setState({
@@ -30,7 +33,10 @@ class Recipes extends Component {
 
     async componentDidUpdate() {
         this._isMounted = true;
-        await axios.get('http://localhost:8081/recipes')
+        await axios.get('http://localhost:8081/recipes', 
+        {
+            headers: { Authorization: `JWT ${localStorage.getItem('jwt')}`}
+        })
         .then(recipes => {
             if (this._isMounted) {
                 this.setState({
@@ -55,7 +61,7 @@ class Recipes extends Component {
         if (this.state.recipes.length === 0) return (
             <div className='container'>
                 <p>No Recipes Found</p>
-                <Link to={'/recipes/new'}><RecipeButton buttonName='Save Recipe' /></Link>
+                <Link to={'/recipes/new'}><RecipeButton buttonName='Add Recipe' /></Link>
             </div>
         ) 
 

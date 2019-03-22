@@ -7,7 +7,14 @@ const RecipeSchema = new Schema({
     ingredients: Array, 
     directions: Array,
     notes: String, 
-    categories: Array
+    categories: Array,
+    owner: {
+        id: {
+            type: mongoose.Schema.Types.ObjectId, 
+            ref: 'User'
+        },
+        username: String
+    }
 })
 
 const Recipe = mongoose.model('recipe', RecipeSchema);
