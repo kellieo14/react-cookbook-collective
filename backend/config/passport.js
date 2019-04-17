@@ -3,10 +3,10 @@ const passport      = require('passport'),
       LocalStrategy = require('passport-local').Strategy,
       db            = require('../models'),
       User          = db.User,
-      passportJWT   = require('passport-jwt'),
-      JWTStrategy   = passportJWT.Strategy,
-      bcrypt        = require('bcrypt'),
-      ExtractJwt    = passportJWT.ExtractJwt;
+      JwtStrategy   = require('passport-jwt').Strategy,
+      ExtractJwt    = require('passport-jwt').ExtractJwt,
+      bcrypt        = require('bcrypt');
+    //   ExtractJwt    = passportJWT.ExtractJwt;
 
 passport.use(new LocalStrategy({
   usernameField: 'username',
@@ -25,18 +25,24 @@ passport.use(new LocalStrategy({
   }
 }));
 
-
 const opts = {}
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('JWT');
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('access_token');
 opts.secretOrKey = process.env.SECRET
-passport.use(new JWTStrategy(opts, (jwt_payload, done) => {
+passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
     console.log(jwt_payload);
-    if (Date.now() > jwt_payload.expires) {
-        console.log('expired');
-        return done ('jwt expired');
-    }
-        // User.findById({_id:jwt_payload.id})
-        console.log('jwt_payload', jwt_payload);
+    User.findOne({id: jwt_payload.sub}, function(err, user) {
+        if (err) {
+            return done(err, false);
+        }
+        if (user) {
+            return done(null, user);
+        } else {
+            return done(null, false);
+            // or you could create a new account
+        }
+    });
+        
+   
         return done (null, jwt_payload);
         
 }))
@@ -49,7 +55,14 @@ passport.use(new JWTStrategy(opts, (jwt_payload, done) => {
 
 
 
-
+// const passport      = require('passport'),
+//       LocalStrategy = require('passport-local').Strategy,
+//       db            = require('../models'),
+//       User          = db.User,
+//       passportJWT   = require('passport-jwt'),
+//       JWTStrategy   = passportJWT.Strategy,
+//       bcrypt        = require('bcrypt'),
+//       ExtractJwt    = passportJWT.ExtractJwt;
 
 
 // const jwtSecret = require ( './jwtConfig');

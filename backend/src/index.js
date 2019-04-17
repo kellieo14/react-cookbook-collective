@@ -6,12 +6,15 @@ const   express     = require('express'),
         mongoose    = require('mongoose'),
         bodyParser  = require('body-parser'),
         Cors        = require('cors'),
+        cookieParser = require('cookie-parser'),
         passport    = require('passport');
 
 const app = express();
+app.use(cookieParser());
+app.use(express.json());
 mongoose.Promise = global.Promise;
 
-app.use(Cors());
+app.use(Cors({ origin: 'http://localhost:3000', credentials: true}));
 
 const port = process.env.PORT || 8081;
 
@@ -23,13 +26,13 @@ app.use(passport.initialize());
 
 //  Prevent CORS errors
 app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
   
-//  Remove caching
-    res.setHeader('Cache-Control', 'no-cache');
+// //  Remove caching
+    res.setHeader('Cache-Control', 'no-cache', 'no-store', 'must-revalidate');
     next();
   });
 
@@ -37,8 +40,14 @@ app.use(function (req, res, next) {
 const   recipeRoutes    = require('../routes/recipes'),
         authRoutes      = require('../routes/auth');
 
+
 app.use(recipeRoutes);
 app.use(authRoutes);
+
+app.use((err, req, res, next) => {
+  res.json(err);
+})
+
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`)

@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './recipe.css';
-import axios from 'axios';
-import {Link, Redirect} from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import {Card, Container, Button} from 'react-bootstrap';
 import EditIconButton from '../buttons/EditIconButton';
 import RecipeButton from '../buttons/RecipeButton';
+import { axiosGetRequest }  from '../../axiosRequest';
 
 
 class Recipe extends Component {
@@ -13,12 +13,12 @@ class Recipe extends Component {
         this.state = {
             recipe: null,
             redirect: false
-        }
+        } 
     }
 
     async componentDidMount() {
         const { match: { params } } = this.props;
-        const recipe = (await (axios.get(`http://localhost:8081/recipes/${params.recipeId}`))).data;
+        const recipe = await axiosGetRequest(`http://localhost:8081/recipes/${params.recipeId}`);
         this.setState({
             recipe: recipe,
         });
@@ -27,14 +27,6 @@ class Recipe extends Component {
     goBack = () => {
         this.props.history.goBack('/recipes');
     }
-
-    // async componentDidUpdate() {
-    //     const { match: { params } } = this.props;
-    //     const recipe = (await axios.get(`http://localhost:8081/recipes/${params.recipeId}`)).data;
-    //     this.setState({
-    //         recipe: recipe,
-    //     });
-    // }
 
 
     render() {
@@ -87,13 +79,3 @@ class Recipe extends Component {
 }
 
 export default Recipe;
-
-
-
-    // async handleDeleteRecipe() {
-    //     const { match: { params } } = this.props;
-    //     await axios.delete(`http://localhost:8081/recipes/${params.recipeId}`)
-    //     .then(() => {
-    //         this.setState(({ redirect: true}))
-    //       });
-    // }

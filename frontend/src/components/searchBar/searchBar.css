@@ -1,0 +1,12 @@
+.parameters {
+    max-width: 150px;
+}
+
+.input-text {
+    background-color: white;
+    /* font-style: italic; */
+}
+
+.parameter-values {
+    font-weight: bold;
+}

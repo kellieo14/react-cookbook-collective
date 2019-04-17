@@ -1,41 +1,83 @@
 
-const   express     = require('express'),
-        passport    = require('passport'),
-        Recipe      = require('../models/recipe');
-const app = express();
 require('../config/passport');
+const   express     = require('express'),
+        // passport    = require('passport'),
+        cookieParser= require('cookie-parser'),
+        bodyParser  = require('body-parser'),
+        jwt         = require('jsonwebtoken'),
+        verifyToken = require('../middleware/middleware'),
+        // User        = require('../models/user')
+        Recipe      = require('../models/recipe');
+        
+const app = express();
+app.use(cookieParser());
+app.use(bodyParser.json());
 
-// //GET ALL RECIPES
-app.get('/recipes',
-passport.authenticate('jwt', {session: false}),
+
+
+app.get('/', async (req, res) => {
+    const token = req.cookies.access_token;
+    const decoded = jwt.verify(token, process.env.SECRET);
+        if (token) {
+            res.send(decoded);
+        } else {
+            res.send(null)
+        }
+})
+
+// GET ALL RECIPES
+app.get('/recipes', verifyToken,
     (req, res) => {
-           Recipe.find({}, function(err, recipes){
-               if(err){
-                    res.redirect('/')
-                } else {
-                    res.send(recipes)
-                }
-           })
+        const token = req.cookies.access_token;
+        const decoded = jwt.verify(token, process.env.SECRET);
+        Recipe.find({ 'owner.id': decoded.id }, function(err, recipes){
+            if(err){
+                console.log(err)
+            } else {
+                res.send(recipes);
+            }
+        })
     }   
 )
 
+// CHECK TOKEN FOR NEW ROUTE
+app.get('/recipes/new', verifyToken,
+    (req, res) => {
+    const token = req.cookies.access_token;
+    const decoded = jwt.verify(token, process.env.SECRET);
+    res.sendStatus(200);
+    }
+)
+
+
 // GET RECIPE BY ID
-app.get('/recipes/:id', (req, res) => {
+app.get('/recipes/:id', verifyToken,
+(req, res) => {
+    const token = req.cookies.access_token;
+    const decoded = jwt.verify(token, process.env.SECRET);
+ 
     Recipe.findById(req.params.id, function(err, recipe){
         if(err || !recipe) {
-            res.redirect('/')
+            console.log('error from :id route:', req.url);
+        } else if (recipe.owner.id != decoded.id) {
+            res.sendStatus(401);
         } else {
             res.send(recipe);
         }
     })
 })
 
-//POST NEW RECIPE
-app.post('/recipes', 
-    (req, res) => {
-    
-    const {title, author, ingredients, directions, notes, categories} = req.body;
 
+//POST NEW RECIPE
+app.post('/recipes', verifyToken, 
+    (req, res) => {
+        const token = req.cookies.access_token;
+        const decoded = jwt.verify(token, process.env.SECRET);
+
+    const {title, author, ingredients, directions, notes, categories} = req.body;
+    const owner = {
+            id: decoded.id
+        }
     const newRecipe = {
         title, 
         author, 
@@ -43,36 +85,54 @@ app.post('/recipes',
         directions,
         notes, 
         categories, 
+        owner: owner
     }
     Recipe.create(newRecipe);
     res.status(200).send();
 })
 
 //EDIT RECIPE
-app.get('/recipes/:id/edit', function (req, res) {
+app.get('/recipes/:id/edit', verifyToken, 
+    (req, res) => {
+        const token = req.cookies.access_token;
+        const decoded = jwt.verify(token, process.env.SECRET);
     Recipe.findById(req.params.id, function(err, recipe){
         if(err || !recipe) {
             res.redirect('/')
+        } else if (recipe.owner.id != decoded.id) {
+            res.sendStatus(401);
         } else {
             res.send(recipe);
         }
     })
 })
 
+
+
 //UPDATE RECIPE
-app.put('/recipes/:id', (req, res) => {
-    Recipe.findByIdAndUpdate({_id:req.params.id}, req.body, function(err){
+app.put('/recipes/:id', verifyToken, 
+    (req, res) => {
+        const token = req.cookies.access_token;
+        const decoded = jwt.verify(token, process.env.SECRET);
+    Recipe.findByIdAndUpdate({_id:req.params.id}, req.body, function(err, recipe){
         if (err) {
             res.send('error');
+        } else if (recipe.owner.id != decoded.id) {
+            res.sendStatus(401);
         }
     })
 })
 
 //DELETE RECIPE
-app.delete('/recipes/:id', (req, res) => {
-    Recipe.findByIdAndRemove(req.params.id, function(err){
+app.delete('/recipes/:id', verifyToken, 
+    (req, res) => {
+        const token = req.cookies.access_token;
+        const decoded = jwt.verify(token, process.env.SECRET);
+    Recipe.findByIdAndRemove(req.params.id, function(err, recipe){
         if (err) {
             res.send(err);
+        } else if (recipe.owner.id != decoded.id) {
+            res.sendStatus(401);
         }
     
     })

@@ -1,80 +1,131 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import axios from 'axios';
 import {Button} from 'react-bootstrap';
 import RecipeButton from '../buttons/RecipeButton';
 import AddIconButton from '../buttons/AddIconButton.js';
 import './recipes.css';
+import { axiosGetRequest } from '../../axiosRequest';
+import SearchBar from '../searchBar/SearchBar';
+import SearchIconButton from '../buttons/SearchIconButton';
+
 
 
 class Recipes extends Component {
-    _isMounted = false;
+    
+    // _isMounted = false;
     constructor(props){
         super(props);
         this.state = {
-            recipes: null, 
+            recipes: [], 
+            search: '', 
+            parameter: 'title',
+            visibleSearch: false,
+            categories: []
         }
     }
 
     async componentDidMount() {
-        this._isMounted = true;
-        await axios.get('http://localhost:8081/recipes', 
-        {
-            headers: { Authorization: `JWT ${localStorage.getItem('jwt')}`}
-        })
-        .then(recipes => {
-            if (this._isMounted) {
-                this.setState({
-                    recipes: recipes.data
-                })
-            }
-        })
+        
+        // this._isMounted = true;
+        const recipes = await axiosGetRequest('http://localhost:8081/recipes')
+        this.setState({
+            recipes: recipes
+        });
     }
 
-    async componentDidUpdate() {
-        this._isMounted = true;
-        await axios.get('http://localhost:8081/recipes', 
-        {
-            headers: { Authorization: `JWT ${localStorage.getItem('jwt')}`}
-        })
-        .then(recipes => {
-            if (this._isMounted) {
-                this.setState({
-                    recipes: recipes.data
-                })
-            }
-        })
-    }
-
-    componentWillUnmount() {
-        this._isMounted = false;
-    }
     // async componentDidUpdate() {
-    //     const recipes =  (await axios.get('http://localhost:8081/recipes')).data;
-    //     this.setState({
-    //             recipes: recipes
-    //     });
+    //     this._isMounted = true;
+    //     await axios.get('http://localhost:8081/recipes')
+    //     .then(recipes => {
+    //         if (this._isMounted) {
+    //             this.setState({
+    //                 recipes: recipes.data
+    //             })
+    //         }
+    //     })
     // }
 
-    render() {
-        if (this.state.recipes === null) return <p>Loading Recipes...</p>;
-        if (this.state.recipes.length === 0) return (
-            <div className='container'>
-                <p>No Recipes Found</p>
-                <Link to={'/recipes/new'}><RecipeButton buttonName='Add Recipe' /></Link>
-            </div>
-        ) 
+    // componentWillUnmount() {
+    //     this._isMounted = false;
+    // }
 
+    updateSearch = (e) => {
+        const search = e.target.value
+        this.setState({ search })
+    }
+
+    updateParameter = (selection) => {
+        const parameter = selection;
+        this.setState({ parameter })
+    }
+
+    handleVisibleSearch = () => {
+        this.setState(function(prevState) {
+            return {visibleSearch: !prevState.visibleSearch}
+        })
+    }
+
+    handleCategoryChange = (input) => {
+        const categories =  input;
+        this.setState({ categories })
+    }
+
+    // noRecipes = () => {
+    //     setTimeout(function(){ return <p>Loading Recipes...</p> }, 3000);
+    // }
+
+
+    render() {
+        let filteredRecipes = this.state.recipes.filter((recipe) => {
+            if (this.state.parameter === 'title') {
+                return recipe.title.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+            } else if (this.state.parameter === 'author') {
+                return recipe.author.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+            } else if (this.state.parameter ==='categories') {
+                return recipe.categories.filter((category) => {
+                    return this.state.categories.indexOf(category) !== -1
+                }).length > 0
+            }
+            return false;
+        });
+
+        if (this.state.recipes === null) {
+            setTimeout(function(){ return <p>Loading Recipes...</p> }, 1000);
+        }
+        if (this.state.recipes.length === 0) {
+            setTimeout(() => {
+                return (
+                    <div className='container'>
+                    <p>No Recipes Found</p>
+                    <Link to={'/recipes/new'}><RecipeButton buttonName='Add Recipe' /></Link>
+                    </div>
+                )
+            }, 1000)}
+
+        
         return (
             <div className='container'>
                 <div className='add-icon-row'>
                     <Link to={'/recipes/new'}><AddIconButton/></Link>
+                    <SearchIconButton onClick={this.handleVisibleSearch}></SearchIconButton>
                 </div>
                 <div className='row'>
                     <h3 className='center'>Recipes</h3>
                 </div>
+                {this.state.visibleSearch && (
+                    <div className='search-bar center'>
+                        <SearchBar 
+                            updateSearch={this.updateSearch}
+                            updateParameter={this.updateParameter}
+                            handleCategoryChange={this.handleCategoryChange}
+                            recipes={this.state.recipes}
+                            search ={this.state.search}
+                        />
+                    </div>
+                )}
+                
                 <div className='row center-recipes'>
-                    {this.state.recipes && this.state.recipes.map(recipe => (
+                    {filteredRecipes && filteredRecipes.sort( (a, b) => a.title.localeCompare(b.title)).map(recipe => (
                         <div key={recipe._id} className='col-sm-12 col-md-6'>
                             <Link to={`recipes/${recipe._id}`}>
                                 <Button className='button'>
@@ -99,3 +150,144 @@ export default Recipes;
 
 
 
+
+// import React, {Component} from 'react';
+// import {Link} from 'react-router-dom';
+// import {Button, Tab, Tabs} from 'react-bootstrap';
+// import RecipeButton from '../buttons/RecipeButton';
+// import AddIconButton from '../buttons/AddIconButton.js';
+// import './recipes.css';
+// import { axiosGetRequest } from '../../axiosRequest';
+// import SearchBar from '../searchBar/SearchBar';
+// import SearchIconButton from '../buttons/SearchIconButton';
+
+
+
+// class Recipes extends Component {
+//     // _isMounted = false;
+//     constructor(props){
+//         super(props);
+//         this.state = {
+//             recipes: [], 
+//             search: '', 
+//             parameter: 'title',
+//             visibleSearch: false,
+//             categories: [], 
+//             titleSearch: ''
+//         }
+//     }
+
+//     async componentDidMount() {
+//         // this._isMounted = true;
+//         const recipes = await axiosGetRequest('http://localhost:8081/recipes')
+//         this.setState({
+//             recipes: recipes
+//         });
+//     }
+
+//     updateSearch = (e) => {
+//         const search = e.target.value
+//         this.setState({ search })
+//     }
+
+//     updateParameter = (selection) => {
+//         const parameter = selection;
+//         this.setState({ parameter })
+//     }
+
+//     handleVisibleSearch = () => {
+//         this.setState(function(prevState) {
+//             return {visibleSearch: !prevState.visibleSearch}
+//         })
+//     }
+
+//     handleCategoryChange = (input) => {
+//         const categories =  input;
+//         this.setState({ categories })
+//     }
+
+
+//     render() {
+//         let tabList = ['ALL', 'A-C', 'D-F', 'G-I', 'J-L', 'M-O', 'P-R', 'S-U', 'V-X', 'Y-Z']
+//         let filteredRecipes = this.state.recipes.filter((recipe) => {
+//             if (this.state.parameter === 'title') {
+//                 return recipe.title.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+//             } else if (this.state.parameter === 'author') {
+//                 return recipe.author.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+//             } else if (this.state.parameter ==='categories') {
+//                 return recipe.categories.filter((category) => {
+//                     return this.state.categories.indexOf(category) !== -1
+//                 }).length > 0
+//             }
+//             return false;
+//         });
+
+//         if (this.state.recipes === null) {
+//             setTimeout(function(){ return <p>Loading Recipes...</p> }, 1000);
+//         }
+//         if (this.state.recipes.length === 0) {
+//             setTimeout(() => {
+//                 return (
+//                     <div className='container'>
+//                     <p>No Recipes Found</p>
+//                     <Link to={'/recipes/new'}><RecipeButton buttonName='Add Recipe' /></Link>
+//                     </div>
+//                 )
+//             }, 1000)}
+
+//         return (
+//             <div className='container'>
+//                 <div className='add-icon-row'>
+//                     <Link to={'/recipes/new'}><AddIconButton/></Link>
+//                     <SearchIconButton onClick={this.handleVisibleSearch}></SearchIconButton>
+//                 </div>
+//                 <div className='row'>
+//                     <h3 className='center'>Recipes</h3>
+//                 </div>
+
+            
+//                 {this.state.visibleSearch && (
+//                     <div className='search-bar center'>
+//                         <SearchBar 
+//                             updateSearch={this.updateSearch}
+//                             updateParameter={this.updateParameter}
+//                             handleCategoryChange={this.handleCategoryChange}
+//                             recipes={this.state.recipes}
+//                             search ={this.state.search}
+//                         />
+//                     </div>
+//                 )}
+
+//                     <Tabs defaultActiveKey="ALL">
+//                     {tabList.map((selection) => {
+//                         return (
+//                         <Tab eventKey={selection} key={selection} title={selection}>
+//                             <div className='row center-recipes'>
+//                                 {filteredRecipes && filteredRecipes.sort( (a, b) => a.title.localeCompare(b.title)).map(recipe => (
+//                                     <div key={recipe._id} className='col-sm-12 col-md-6'>
+//                                         <Link to={`recipes/${recipe._id}`}>
+//                                             <Button className='button'>
+//                                                 <div className='mb-3 title'>
+//                                                     <div>{recipe.title}</div>
+//                                                 </div>
+//                                             </Button>
+//                                         </Link>
+//                                     </div>
+//                                 ))}
+//                             </div>
+//                     </Tab>
+//                         )
+//                     })}
+                   
+//                     </Tabs>
+                
+                
+//                 <div className='center add-recipe'>
+//                     <Link to={'/recipes/new'}><RecipeButton buttonName='Add Recipe'/></Link>
+//                 </div>
+//             </div>
+//         )
+//     }
+// }
+
+// export default Recipes;

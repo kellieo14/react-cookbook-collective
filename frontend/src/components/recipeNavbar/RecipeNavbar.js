@@ -1,58 +1,74 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {Navbar, Nav, NavDropdown} from 'react-bootstrap'
+import {Navbar, Nav, NavDropdown} from 'react-bootstrap';
 import './recipeNavbar.css';
+import { axiosGetRequest } from '../../axiosRequest';
 
-function RecipeNavbar() {
-    return (
 
-        <Navbar className='fixed-top' collapseOnSelect expand='lg' bg='dark' variant='dark'>
-        <Navbar.Brand><Link className='navbar-link' to='/'>Kellie's Cookbook Collective</Link></Navbar.Brand>
-        <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-        <Navbar.Collapse id='responsive-navbar-nav'>
-          <Nav className='ml-auto'>
-            <NavDropdown  title='Recipes' id='collasible-nav-dropdown'>
-              <Link variant='dark' className='dropdown-link' to='/recipes'>View My cookbook</Link>
-              <NavDropdown.Divider />
-              <Link variant='dark' className='dropdown-link' to='/recipes/new'>Add Recipe</Link>
-            </NavDropdown>
-          </Nav>
-          <Nav>
-            <Nav.Link href='#deets'>Friends</Nav.Link>
-            <Nav.Link eventKey={2} href='#memes'>
-              My Account
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
+class RecipeNavbar extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            navExpanded: false
+        }
+    }
 
-    )
+    setNavExpanded = (expanded) => {
+        this.setState({ navExpanded: expanded });
+    }
+    
+    closeNav = () => {
+        this.setState({ navExpanded: false });
+    }
+
+    handleLogout = async (req, res) => {
+        await axiosGetRequest('http://localhost:8081/logout')
+        this.props.logoutUser();
+        this.setState({ navExpanded: false });
+
+    }
+
+    render() {
+        return (
+            <Navbar onToggle={this.setNavExpanded}
+                expanded={this.state.navExpanded} className='fixed-top' expand='lg' bg='dark' variant='dark'>
+                <Navbar.Brand><Link className='navbar-link' to='/'>Kellie's Cookbook Collective</Link></Navbar.Brand>
+                <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+                {!this.props.user && (
+                    <Navbar.Collapse id='responsive-navbar-nav'>
+                        <Nav className='ml-auto'>
+                            <Navbar.Text ><Link  onClick={this.closeNav} className='login-register-text' to='/login'>Login</Link></Navbar.Text>
+                            <Navbar.Text><Link onClick={this.closeNav} className='login-register-text' to='/register'>Register</Link></Navbar.Text>
+                        </Nav>
+                    </Navbar.Collapse>
+                )}
+        
+                {this.props.user && (
+                    <Navbar.Collapse variant='dark' id='responsive-navbar-nav'>
+                        <Nav className='ml-auto'>
+                        <NavDropdown title='Recipes' >
+                            <Link variant='dark' onClick={this.closeNav} className='dropdown-link' to='/recipes'>View My cookbook</Link>
+                            <NavDropdown.Divider />
+                            <Link variant='dark' onClick={this.closeNav} className='dropdown-link' to='/recipes/new'>Add Recipe</Link>
+                        </NavDropdown>
+                        </Nav>
+                        <Nav className='justify-end-content'>
+                            <NavDropdown  title='My Account' >
+                                <Link variant='dark' onClick={this.closeNav} className='dropdown-link' to='/'>My Account</Link>
+                                <NavDropdown.Divider />
+                                <Link variant='dark' onClick={this.closeNav} className='dropdown-link' to='/'>Friends</Link>
+                            </NavDropdown>
+                        </Nav>
+                        <Navbar.Text className='logout' onClick={this.handleLogout}>Logout</Navbar.Text>
+
+                    </Navbar.Collapse>
+                )}
+                
+            </Navbar>
+        )
+    }
 }
+
 
 export default RecipeNavbar;
 
-
-// function Navbar() {
-//     return (
-//         <nav className='navbar navbar-expand-lg navbar-dark bg-primary fixed-top'>
-//             <Link className='navbar-brand' to='/'>
-//                 Kellie's Cookbook Collective
-//             </Link>
-//             <div className='collapse navbar-collapse' id='navbarColor01'>
-//                 <ul className='navbar-nav ml-auto'>
-//                     <li className='nav-item active'>
-//                         <Link className='nav-link' to='/'>Home <span className='sr-only'>(current)</span></Link>
-//                     </li>
-//                     <li className='nav-item'>
-//                         <Link className='nav-link' to='/recipes'>Recipes</Link>
-//                     </li>
-//                     <li className='nav-item'>
-//                         <Link className='nav-link' to='/recipes/new'>Add Recipe</Link>
-//                     </li>
-//                 </ul>
-//             </div>
-//         </nav>
-//     )
-// }
-
-// export default Navbar;

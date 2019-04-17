@@ -1,12 +1,18 @@
 import React, {Component} from 'react';
 import RecipeForm from '../recipeForm/RecipeForm';
-import axios from 'axios';
+import {axiosPostRequest, axiosGetRequest} from '../../axiosRequest';
+
 
 
 class AddRecipe extends Component {
 
+    async componentDidMount() {
+        await axiosGetRequest(`http://localhost:8081/recipes/new`);
+    }
+
     async onSubmit(recipe) {
-        await axios.post('http://localhost:8081/recipes', {
+        await axiosPostRequest('http://localhost:8081/recipes',
+         {
             title: recipe.title,
             author: recipe.author,
             ingredients: recipe.ingredients,

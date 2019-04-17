@@ -15,5 +15,20 @@
 .dropdown-link:hover {
     text-decoration: none;
     color: inherit;
+    font-weight: 200;
+}
+
+.login-register-text {
+    padding-left: 15px;
+}
+
+.login-register-text:hover {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.logout:hover {
+    color: #C5C6C6;
+    cursor: pointer;
 }
 

@@ -1,13 +1,17 @@
 require('dotenv').config();
+require('../config/passport');
 
 const   express     = require('express'),
+        cookieParser = require('cookie-parser'),
         passport    = require('passport'),
         bcrypt      = require('bcrypt'),
         db          = require('../models'),
         jwt         = require('jsonwebtoken');
 
 const app = express();
-require('../config/passport');
+app.use(cookieParser());
+app.use(express.json());
+
 const User = db.User;
 
 
@@ -41,27 +45,33 @@ app.post('/login', (req, res) => {
         const payload = {
           username: user.username,
           id: user._id,
-          expires: Date.now() + parseInt(process.env.JWT_EXPIRATION_MS),
         };
-        console.log("payload", payload);
-  
+
         /** assigns payload to req.user */
         req.login(payload, {session: false}, (error) => {
           if (error) {
             res.status(400).send({ error });
           }
-  
         //   /** generate a signed json web token and return it in the response */
           const token = jwt.sign(payload, process.env.SECRET);
-          console.log('token', token);
+         
           
           /** assign our jwt to the cookie */
-        //   res.cookie('jwt', token, { httpOnly: true, secure: true });
-          return res.json({ token })
-            // res.status(200).send({ token });
+          res.cookie('access_token', token, {
+            httpOnly: true,
+            maxAge: 90000000000000, 
+          });
+     
+          res.status(200).end();
+
         });
       },
     )(req, res);
   });
+
+  app.get('/logout', (req, res) => {
+    req.logout();
+    res.status(200).cookie('access_token', '', {maxAge: 0, expires: Date.now(), httpOnly: true}).end()
+  })
 
   module.exports = app;
