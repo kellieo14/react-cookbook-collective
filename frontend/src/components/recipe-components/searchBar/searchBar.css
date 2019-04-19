@@ -10,3 +10,7 @@
 .parameter-values {
     font-weight: bold;
 }
+
+.search-bar {
+    width: 80%;
+}

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Form} from 'react-bootstrap';
+import './searchCheckboxes.css';
 
 class SearchCheckboxes extends Component {
     
@@ -28,27 +29,34 @@ class SearchCheckboxes extends Component {
     render() {
         const categories = ['pie', 'cake', 'cheesecake', 'cupcake', 'ice cream', 'brownie', 'cookie', 'cobbler', 'chocolate', 'fruit', 'caramel', 'other' ].sort();
         return (
-            <div className='container'>
+            <div className='container center'>
                 <Form>
                     <div className='row category-rows'>
                         {categories.map((category) => {
                             return (
-                                <div className='col-xs-6 col-md-3 col-lg-2 ml-3' key={category}>
-                                    <label>
-                                        <input
-                                            type='checkbox'
-                                            name={category}
-                                            value={category}
-                                            className='category'
-                                            onChange = {this.handleUpdateSearchCategory}
-                                        />
-                                    {`     ` + category}
-                                    </label>
-                                </div>
+                              
+                                <div className='checkbox' key={category}>
+                                
+                                <label>
+                             
+                                    <input
+                                        type='checkbox'
+                                        name={category}
+                                        value={category}
+                                        className='category'
+                                        onChange = {this.handleUpdateSearchCategory}
+                                    />
+                                {`     ` + category}
+                               
+                                </label>
+                              
+                            </div>
+  
                             )
                         })}
                     </div>
                 </Form>
+                <hr/>
             </div>
         )
     }

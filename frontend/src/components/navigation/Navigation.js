@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {Navbar, Nav, NavDropdown} from 'react-bootstrap';
-import './recipeNavbar.css';
 import { axiosGetRequest } from '../../axiosRequest';
+import './navigation.css';
 
 
-class RecipeNavbar extends Component {
+class Navigation extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -22,10 +22,10 @@ class RecipeNavbar extends Component {
     }
 
     handleLogout = async (req, res) => {
-        await axiosGetRequest('http://localhost:8081/logout')
+        await axiosGetRequest('logout')
         this.props.logoutUser();
-        this.setState({ navExpanded: false });
-
+        this.setState({ navExpanded: false })
+        window.location.href='/login';
     }
 
     render() {
@@ -49,7 +49,7 @@ class RecipeNavbar extends Component {
                         <NavDropdown title='Recipes' >
                             <Link variant='dark' onClick={this.closeNav} className='dropdown-link' to='/recipes'>View My cookbook</Link>
                             <NavDropdown.Divider />
-                            <Link variant='dark' onClick={this.closeNav} className='dropdown-link' to='/recipes/new'>Add Recipe</Link>
+                            <Link variant='dark' onClick={this.closeNav} className='dropdown-link' to='/recipe/new'>Add Recipe</Link>
                         </NavDropdown>
                         </Nav>
                         <Nav className='justify-end-content'>
@@ -70,5 +70,5 @@ class RecipeNavbar extends Component {
 }
 
 
-export default RecipeNavbar;
+export default Navigation;
 

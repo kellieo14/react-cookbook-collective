@@ -1,6 +1,6 @@
 import React from 'react';
 import {Modal} from 'react-bootstrap';
-import RecipeButton from '../buttons/RecipeButton';
+import RecipeButton from '../../buttons/RecipeButton';
 import './recipeConfirmDeleteModal.css';
 
 

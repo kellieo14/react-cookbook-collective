@@ -8,16 +8,17 @@ import { Container } from 'react-bootstrap';
 
 class Login extends Component {
 
+
     onSubmit = async (user) => {
         const {history, loginUser} = this.props;
-        await axiosPostRequest('http://localhost:8081/login', {
+        await axiosPostRequest('login', {
             username: user.username,
             password: user.password
         })
         .then(function(response){
             if (response.status === 200) {
-                history.push('/');
                 loginUser();
+                history.push('/');
             }
         }).catch(function(error) {
             console.log('Login failed. Please try again.');

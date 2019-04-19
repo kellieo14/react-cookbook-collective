@@ -40,7 +40,7 @@
 }
 
 .add-recipe {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .add-icon-row {
@@ -50,6 +50,6 @@
 }
 
 .search-bar {
-    width: 50%;
+    width: 100%;
     min-width: 285px;
 }

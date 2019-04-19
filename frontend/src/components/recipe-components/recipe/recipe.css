@@ -14,33 +14,9 @@
     width: 75%;
 }
 
-/* .buttonRow {
-    margin: 15px;
-    background-color: white;
-    border: 1px solid white;
-    color: rgb(32, 36, 36);
+.edit-print-row {
+    justify-content: flex-end;
 }
-
-.buttonRow:hover {
-    background-color: white;
-    border: 1px solid rgb(32, 36, 36);
-    color: rgb(32, 36, 36);
-} */
-/* 
-.edit-button {
-    background-color:white;
-    border: 1px solid rgb(32, 36, 36);
-    color: rgb(32, 36, 36);
-    margin: 15px;
-}
-
-.edit-button:hover {
-    background-color:rgb(32, 36, 36);
-    border: 1px solid white;
-    color: white;
-} */
-
-
 
 .back-button {
     background-color:white;
@@ -56,10 +32,6 @@
     margin: 15px;
 }
 
-.button-row {
-    display: flex;
-    justify-content: space-between;
-}
 .button-row {
     display: flex;
     justify-content: space-between;

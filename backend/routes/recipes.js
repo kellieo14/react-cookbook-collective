@@ -1,12 +1,10 @@
 
 require('../config/passport');
 const   express     = require('express'),
-        // passport    = require('passport'),
         cookieParser= require('cookie-parser'),
         bodyParser  = require('body-parser'),
         jwt         = require('jsonwebtoken'),
         verifyToken = require('../middleware/middleware'),
-        // User        = require('../models/user')
         Recipe      = require('../models/recipe');
         
 const app = express();
@@ -17,8 +15,8 @@ app.use(bodyParser.json());
 
 app.get('/', async (req, res) => {
     const token = req.cookies.access_token;
-    const decoded = jwt.verify(token, process.env.SECRET);
         if (token) {
+            const decoded = jwt.verify(token, process.env.SECRET);
             res.send(decoded);
         } else {
             res.send(null)
@@ -88,7 +86,7 @@ app.post('/recipes', verifyToken,
         owner: owner
     }
     Recipe.create(newRecipe);
-    res.status(200).send();
+    res.sendStatus(200);
 })
 
 //EDIT RECIPE
@@ -120,6 +118,7 @@ app.put('/recipes/:id', verifyToken,
         } else if (recipe.owner.id != decoded.id) {
             res.sendStatus(401);
         }
+        res.sendStatus(200);
     })
 })
 
@@ -134,7 +133,7 @@ app.delete('/recipes/:id', verifyToken,
         } else if (recipe.owner.id != decoded.id) {
             res.sendStatus(401);
         }
-    
+        res.sendStatus(200);
     })
 })
 

@@ -7,7 +7,7 @@ import RecipeButton from '../../buttons/RecipeButton';
 class Logout extends Component {
 
     handleLogout = async (req, res) => {
-        await axiosGetRequest('http://localhost:8081/logout')
+        await axiosGetRequest('logout')
         this.props.logoutUser()
     }
 

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import {Route, Switch} from 'react-router-dom';
-import RecipeNavbar from './components/recipeNavbar/RecipeNavbar';
-import Recipes from './components/recipes/Recipes';
-import Recipe from './components/recipe/Recipe';
+import {Route, Switch, Redirect} from 'react-router-dom';
+import Navigation from './components/navigation/Navigation';
+import Recipes from './components/recipe-components/recipes/Recipes';
+import Recipe from './components/recipe-components/recipe/Recipe';
 import HomePage from './components/homePage/HomePage';
-import AddRecipe from './components/addRecipe/AddRecipe';
-import NotFoundPage from './components/NotFoundPage/NotFoundPage';
-import EditRecipe from './components/editRecipe/EditRecipe';
+import AddRecipe from './components/recipe-components/addRecipe/AddRecipe';
+import NotFoundPage from './components/notFoundPage/NotFoundPage';
+import EditRecipe from './components/recipe-components/editRecipe/EditRecipe';
 import Register from './components/authentication/register/Register';
 import Login from './components/authentication/login/Login';
 import Logout from './components/authentication/logout/Logout';
@@ -23,35 +23,38 @@ class App extends Component {
         }
     }
     async componentDidMount() {
-        const user = await axiosGetRequest(`http://localhost:8081/`);
+        const user = await axiosGetRequest('');
         this.setState({
             user: user,
         })
     }
 
     loginUser = async () => {
-        const newUser = await axiosGetRequest(`http://localhost:8081/`);
+        const newUser = await axiosGetRequest('');
         this.setState({
             user: newUser
         })
     }
     
-    logoutUser = async () => {
+    logoutUser = () => {
         this.setState({
             user: null
-        })
+        })   
     }
 
     render() {
         return (
             <div>
-                <RecipeNavbar logoutUser={this.logoutUser} user={this.state.user} />
+        
+                <Navigation logoutUser={this.logoutUser} user={this.state.user} />
                 <Switch>
-                    <Route exact path='/recipes/new' component={AddRecipe} />
-                    <Route exact path='/recipes/:recipeId' component={Recipe} />
-                    <Route exact path='/recipes/:recipeId/edit' component={EditRecipe} />
+                    <Route exact path='/recipe/new' component={AddRecipe} />
+                    <Route exact path='/recipe/:recipeId' component={Recipe} />
+                    <Route exact path='/recipe/:recipeId/edit' component={EditRecipe} />
+                    <Route exact path='/recipes/:pageId?' render={props => {
+                        return (<Recipes key={props.match.params.pageId} {...props} />)
+                    }} />
                     <Route exact path='/' component={HomePage} />
-                    <Route exact path='/recipes' component={Recipes} />
                     <Route exact path='/register' render={props => !this.state.user ? <Register /> : <Logout {...props} logoutUser={this.logoutUser} user={this.state.user}/>}  />
                     <Route exact path='/login' 
                         render={props => !this.state.user ? <Login {...props} loginUser={this.loginUser}/> : <Logout {...props} logoutUser={this.logoutUser} user={this.state.user}/>} />
@@ -63,3 +66,4 @@ class App extends Component {
 }
 
 export default App;
+

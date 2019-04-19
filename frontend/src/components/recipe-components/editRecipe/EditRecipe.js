@@ -23,7 +23,7 @@ class EditRecipe extends Component {
 
     async onSubmit(recipe) {
         const { match: { params } } = this.props;
-        await axios.put(`http://localhost:8081/recipes/${params.recipeId}`, {
+        return await axios.put(`http://localhost:8081/recipes/${params.recipeId}`, {
         ...recipe
         })
     }
