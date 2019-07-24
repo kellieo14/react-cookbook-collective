@@ -1,3 +1,5 @@
+
+
 .navbar-link {
     color: white
 }
@@ -8,14 +10,12 @@
 }
 
 .dropdown-link {
-    margin: 0;
-    padding: 10px;
-    color: rgb(32, 36, 36);
+    color: #343a40;
 }
 .dropdown-link:hover {
     text-decoration: none;
     color: inherit;
-    font-weight: 200;
+    font-weight: 400;
 }
 
 .login-register-text {
@@ -27,8 +27,61 @@
     font-weight: bold;
 }
 
+.logout {
+    margin-left:  16px;
+}
 .logout:hover {
     color: #C5C6C6;
     cursor: pointer;
 }
+
+.dropdown-item {
+    background-color: white;
+}
+
+.dropdown-item:hover{
+    background-color: white;
+    font-weight: 600;
+}
+
+.dropdown-item.active {
+    background-color: white;
+    color: black;
+}
+
+.initial {
+    width: 41px;
+    height: 41px;
+    border-radius: 50%;
+    border: solid white 2px;
+    text-align: center;
+    color: white;
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+
+
+span.logout.dropdown-link.navbar-text {
+    color: black;
+    padding: 5px;
+}
+
+span.logout.dropdown-link.navbar-text:hover {
+    color: black;
+    padding: 5px;
+    font-weight: 600;
+}
+
+
+.navbar-link img {
+    width: 28px;
+    height: 28px;
+    margin-right: 7px;
+}
+
+.fixed-top {
+    border-bottom: 1px solid #ff6464;
+}
+
 

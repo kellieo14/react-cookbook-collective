@@ -1,91 +1,795 @@
+/* -------------------------UNIVERSAL BUTTON STYLES------------------------------------- */
+.fas {
+    margin: 3px;
+}
+
+#icon {
+    font-size: 35px;
+    color: #fbfaf5;
+}
+
+/* -------------------------------------BorderBoxButton----------------------------- */
+.basic-box {
+    width: 150px;
+    height: 50px;
+    margin: 10px auto;
+    color: #4274D3;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.15rem;
+    line-height: 50px;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+  }
+
+svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* svg rect, svg path, svg polyline {
+    fill: none;
+    stroke: #4274D3;
+    stroke-width: 1;
+} */
+  
+.basic-box:hover svg rect {
+    stroke: #ff6464;
+}
+
+svg rect {
+    stroke-dasharray: 1000, 0;
+    -webkit-transition: all 0.8s ease-in-out;
+    -moz-transition: all 0.8s ease-in-out;
+    -ms-transition: all 0.8s ease-in-out;
+    -o-transition: all 0.8s ease-in-out;
+    transition: all 0.8s ease-in-out;
+}
+
+.basic-box:hover svg rect {
+    stroke-width: 3;
+    stroke-dasharray: 35,  255;
+    stroke-dashoffset: 38;
+    -webkit-transition: all 0.8s ease-in-out;
+    -moz-transition: all 0.8s ease-in-out;
+    -ms-transition: all 0.8s ease-in-out;
+    -o-transition: all 0.8s ease-in-out;
+    transition: all 0.8s ease-in-out;
+}
+
+
+.basic-box i {
+      margin: 5px;
+}
+
+/* ---------------------------------------BorderBoxButtonSmall ----------------------*/
+.basic-box-small {
+    width: 50px;
+    height: 50px;
+    margin: 10px auto;
+    color: #4274D3;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.15rem;
+    line-height: 50px;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+}
+
+svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+svg rect, svg path, svg polyline {
+    fill: none;
+    stroke: #4274D3;
+    stroke-width: 1;
+}
+      
+.basic-box-small:hover svg rect {
+    stroke: #ff6464;
+}
+    
+svg rect {
+    stroke-dasharray: 500, 0;
+    -webkit-transition: all 0.8s ease-in-out;
+    -moz-transition: all 0.8s ease-in-out;
+    -ms-transition: all 0.8s ease-in-out;
+    -o-transition: all 0.8s ease-in-out;
+    transition: all 0.8s ease-in-out;
+}
+
+.basic-box-small:hover svg rect {
+    stroke-width: 3;
+    stroke-dasharray: 35,  110;
+    stroke-dashoffset: 38;
+    -webkit-transition: all 0.8s ease-in-out;
+    -moz-transition: all 0.8s ease-in-out;
+    -ms-transition: all 0.8s ease-in-out;
+    -o-transition: all 0.8s ease-in-out;
+    transition: all 0.8s ease-in-out;
+}
+    
+.basic-box-small i {
+    margin: 5px;
+}
+
+.border-box-link:hover {
+    text-decoration: none;
+}
+
+.border-box-link {
+    margin: 5px;
+}
+
+/* ---------------------------------------BorderBoxButtonLarge ----------------------*/
+.basic-box-large {
+    width: 200px;
+    height: 90px;
+    margin: 0 auto;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.45rem;
+    line-height: 90px;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+}
+
+/* svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+} */
+
+.basic-box-large svg rect, svg path, svg polyline {
+    fill: none;
+    stroke: white;
+    stroke-width: 2;
+}
+      
+.basic-box-large:hover svg rect {
+    stroke: #fadc59;
+}
+
+svg rect {
+    stroke-dasharray: 500, 0;
+    -webkit-transition: all 0.8s ease-in-out;
+    -moz-transition: all 0.8s ease-in-out;
+    -ms-transition: all 0.8s ease-in-out;
+    -o-transition: all 0.8s ease-in-out;
+    transition: all 0.8s ease-in-out;
+}
+
+.basic-box-large:hover svg rect {
+    stroke-width: 3;
+    stroke-dasharray: 70,  350;
+    stroke-dashoffset: 70;
+    -webkit-transition: all 0.8s ease-in-out;
+    -moz-transition: all 0.8s ease-in-out;
+    -ms-transition: all 0.8s ease-in-out;
+    -o-transition: all 0.8s ease-in-out;
+    transition: all 0.8s ease-in-out;
+}
+    
+/* .basic-box-large i {
+    margin: 5px;
+} */
+
+.border-box-link:hover {
+    text-decoration: none;
+}
+
+.border-box-link {
+    margin: 5px;
+}
+
+/* ----------------------------------------CIRCLE BUTTON------------------------------------ */
+.ch-grid {
+    margin: 20px 0 0 0;
+    padding: 0;
+    list-style: none;
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+    
+.ch-grid:after,
+.ch-item:before {
+    content: '';
+    display: table;
+}
+    
+.ch-grid:after {
+    clear: both;
+}
+
+.ch-grid li {
+    width: 250px;
+    height: 250px;
+    display: inline-block;
+    margin: 20px;
+}
+
+.ch-item {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: relative;
+    cursor: default;
+    perspective: 900px;
+}
+
+.ch-info{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.ch-info > div {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-position: center center;
+    transition: all 0.4s linear;
+    transform-origin: 50% 0%;
+}
+
+.ch-info .ch-info-front {
+    box-shadow: inset 0 0 0 16px rgba(0,0,0,0.3);
+}
+
+.ch-info .ch-info-back {
+    transform: translate3d(0,0,-220px) rotate3d(1,0,0,90deg);
+    background: #343a40;
+    opacity: 0;
+}
+
+.ch-img-1 { 
+    background-color: #343a40;
+    background-size: cover;
+    background-image: url('./images/whisk3.png');
+}
+
+.ch-info h3 {
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 24px;
+    margin:  15px;
+    padding: 60px 0 0 0;
+    height: 110px;
+    font-family: 'Open Sans', Arial, sans-serif;
+    text-shadow: 
+        0 0 1px #fff, 
+        0 1px 2px rgba(0,0,0,0.3);
+}
+    
+.ch-info .circle-button-link {
+    width: 70%;
+    margin: 0 auto;
+    display: block;
+    color: rgba(255,255,255,0.7);
+    font-style: normal;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding-top: 15px;
+    font-family: 'Open Sans', Arial, sans-serif;
+}
+
+.circle-button-link .border-top {
+    border-top: 1px solid white;
+}
+    
+.ch-info .circle-button-link:hover {
+    color: #ff6464;
+    text-decoration: none;
+}
+
+.ch-item:hover .ch-info-front {
+    transform: translate3d(0,280px,0) rotate3d(1,0,0,-90deg);
+    opacity: 0;
+}
+
+.ch-item:hover .ch-info-back {
+    transform: rotate3d(1,0,0,0deg);
+    opacity: 1;
+}
+
+.circle-button-image {
+    height: 100px;
+    margin: 20px;
+    padding-top: 20px;
+}
+
+
+/* ----------------------------------GO BACK BUTTON------------------------------------------- */
+
+.custom-underline {
+    position: relative;
+    display: inline-block;
+    font-size: inherit;
+    text-align: center;
+    margin: 15px;
+    line-height: 50px;
+  }
+
+.custom-underline,
+.custom-underline:hover,
+.custom-underline:focus,
+.custom-underline:active {
+  color: white;
+  background-color: inherit;
+  text-decoration: none;
+  border: none;
+}
+
+.custom-underline::after {
+    content: "";
+    position: absolute;
+  }
+
+.back-button-underline-div .custom-underline::after {
+    top: 65%;
+    height: 2px;
+    width: 0%;
+    right: 5%;
+    margin-top: 10px;
+    background-color: #E85B5B;
+    transition: 0.5s ease all .3s;
+}
+  
+.back-button-underline-div:hover .custom-underline::after {
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 60%;
+    transition: 0.3s ease all;
+}
+
+
+/* ------------------------------HOMEPAGE BUTTONS------------------------------------------- */
+
+.homepage-button {
+    border-radius: 50%;
+    height: 7em;
+    width: 7em;
+    background-color: inherit;
+    border: 2px solid white;
+    margin: 10px;
+}
+
+.homepage-button:hover {
+    border-radius: 50%;
+    height: 7em;
+    width: 7em;
+    background-color: #ff6464;
+    border: 2px solid white;
+}
+
+
+/* ------------------------------PROFILE PAGE BUTTONS-------------------------------------------- */
+
+.block {
+    width: 100%;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.hovicon {
+    display: inline-block;
+    font-size: 45px;
+    line-height: 200px;
+    cursor: pointer;
+    /* margin: 20px; */
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    text-align: center;
+    position: relative;
+    text-decoration: none;
+    z-index: 1;
+    color: #4274D3;
+    border: 2px solid #4274D3;
+}
+
+.hovicon:after {
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    content:'';
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+.hovicon:before {
+    speak: none;
+    font-size: 48px;
+    line-height: 90px;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    display: block;
+    -webkit-font-smoothing: antialiased;
+}
+
+.hovicon.effect-1 {
+    /* background-color: rgba(255, 255, 255, 0.1); */
+    -webkit-transition: background-color 0.2s, color 0.2s;
+    -moz-transition: background-color 0.2s, color 0.2s;
+    transition: background-color 0.2s, color 0.2s;
+}
+.hovicon.effect-1:after {
+    top: -7px;
+    left: -7px;
+    padding: 7px;
+    box-shadow: 0 0 0 4px #4274D3;
+    -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
+    -webkit-transform: scale(.8);
+    -moz-transition: -moz-transform 0.2s, opacity 0.2s;
+    -moz-transform: scale(.8);
+    -ms-transform: scale(.8);
+    transition: transform 0.2s, opacity 0.2s;
+    transform: scale(.8);
+    opacity: 0;
+}
+
+.hovicon.effect-1.sub-a:hover {
+    background-color: #4274D3;
+    color: white;
+    border: none;
+}
+
+.hovicon.effect-1.sub-a:hover i {
+    color: white;
+}
+
+.hovicon.effect-1.sub-a:hover:after {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+}
+
+
+
+
+
+
+
+
+
+/* .profile-page-button {
+    width: 10em;
+    height: 10em;
+    border-radius: 50%;
+    margin: 20px;
+    background-color: white;
+    border: solid 3px yellow;    
+
+}
+
+.profile-page-button:hover {
+    background-color: white;
+    opacity: .8;
+    color: #343a40;
+    border: solid 3px #343a40;
+
+}
+
+.profile-page-button:hover > #icon {
+    color: #343a40;
+}
+
+.profile-confirm-button {
+    background-color: #fbfaf5;
+    border: 2px solid #343a40;
+    color: #343a40;
+    margin: 10px;
+    font-weight: bold;
+}
+
+.profile-confirm-button:hover {
+    background-color: #343a40;
+    border: 2px solid #343a40;
+    color: #fbfaf5;
+
+} */
+
+/* -------------------------RECIPE BUTTON - MODAL-------------------------------------------- */
+
 .recipe-button {
-    background-color:white;
-    border: 1px solid rgb(32, 36, 36);
-    color: rgb(32, 36, 36);
+    background-color:inherit;
+    border: 1px solid #343a40;
+    color: #343a40;
+    margin: 5px;
 }
 
 .recipe-button:hover {
-    background-color:rgb(32, 36, 36);
+    background-color:#343a40;
     border: 1px solid white;
     color: white;
 }
 
-.edit-icon-button {
-    background-color:white;
-    border: 1px solid rgb(32, 36, 36);
-    color: rgb(32, 36, 36);
+
+/* ---------------------------THUMBTACK-------------------------------------------- */
+.thumbtack-off-button {
+    background-color:#343a40;
+    border: 1px solid #343a40;
+    color: white;
     margin: 15px;
 }
 
-.edit-icon-button:hover {
-    background-color:rgb(32, 36, 36);
+
+.thumbtack-off-button:hover {
+    background-color:#343a40;
     border: 1px solid white;
     color: white;
 }
 
-.delete-icon-button {
-    background-color:white;
-    border: 1px solid rgb(32, 36, 36);
-    color: rgb(32, 36, 36);
+.thumbtack-on-button {
+
+    background-color:#ff6464;
+    border: 1px solid white;
+    color: white;
     margin: 15px;
 }
 
-.delete-icon-button:hover {
-    background-color:rgb(32, 36, 36);
-    border: 1px solid white;
-    color: white;
+.thumbtack-on-button:hover {
+    background-color:white;
+    border: 1px solid #343a40;
+    color: #343a40;
 }
+
+/* -----------------------------------RECTANGLE BUTTON------------------------------ */
+.ch-grid-rectangle {
+    /* margin: 20px 0 0 0; */
+    padding: 0;
+    list-style: none;
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+    
+.ch-grid-rectangle:after,
+.ch-item-rectangle:before {
+    content: '';
+    display: table;
+}
+    
+.ch-grid-rectangle:after {
+    clear: both;
+}
+
+.ch-grid-rectangle li {
+    width: 220px;
+    height: 220px;
+    display: inline-block;
+    margin: 20px;
+}
+
+.ch-item-rectangle {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    cursor: default;
+}
+
+.ch-info-rectangle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.ch-info-rectangle > div {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* background-position: center center; */
+    transition: all 0.4s linear;
+    transform-origin: 50% 0%;
+}
+
+.ch-info-rectangle .ch-info-front-rectangle {
+    box-shadow: inset 0 0 0 16px rgba(0,0,0,0.3);
+}
+
+.ch-info-rectangle .ch-info-back-rectangle {
+    transform: translate3d(0,0,-220px) rotate3d(1,0,0,90deg);
+    background: #343a40;
+    opacity: 0;
+}
+
+.ch-img-1-rectangle { 
+    background-color: inherit;
+}
+
+.ch-info-rectangle p {
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 24px;
+    margin:  15px;
+    padding: 60px 0 0 0;
+    /* height: 110px; */
+    font-family: 'Open Sans', Arial, sans-serif;
+    text-shadow: 
+        0 0 1px #fff, 
+        0 1px 2px rgba(0,0,0,0.3);
+}
+    
+/* .ch-info-rectangle .circle-button-link {
+    width: 70%;
+    margin: 0 auto;
+    display: block;
+    color: rgba(255,255,255,0.7);
+    font-style: normal;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding-top: 15px;
+    font-family: 'Open Sans', Arial, sans-serif;
+} */
+
+/* .circle-button-link .border-top {
+    border-top: 1px solid white;
+} */
+    
+/* .ch-info .circle-button-link:hover {
+    color: #ff6464;
+    text-decoration: none;
+} */
+
+.ch-item-rectangle:hover .ch-info-front-rectangle {
+    transform: translate3d(0,280px,0) rotate3d(1,0,0,-90deg);
+    opacity: 0;
+}
+
+.ch-item-rectangle:hover .ch-info-back-rectangle {
+    transform: rotate3d(1,0,0,0deg);
+    opacity: 1;
+}
+
+
+
+
+
+
+
+  
+
+
+/* ----------------------------OLD BUTTON-------------------------------- */
+
+/* 
 
 .add-icon-button {
-    background-color:white;
-    border: 1px solid rgb(32, 36, 36);
-    color: rgb(32, 36, 36);
+    background-color:inherit;
+    border: 1px solid #F8F8F8;
+    color: #F8F8F8;
     margin: 15px;
 }
 
 .add-icon-button:hover {
-    background-color:rgb(32, 36, 36);
+    border: 1px solid white;
+    background-color: #FFC8B6;
+    color: white;
+}
+
+.button-bar-save-button {
+
+    background-color: #343a40;
+    border: 2px solid #343a40;
+    color: white;
+    margin: 15px;
+}
+
+.button-bar-save-button:hover {
+    border: 2px solid #343a40;
+    background-color: white;
+    opacity: .8;
+    color: #343a40;
+}
+
+.delete-icon-button {
+    background-color:inherit;
+    border: 1px solid white;
+    color: white;
+    margin: 15px;
+}
+
+.delete-icon-button:hover {
+    background-color:white;
+    opacity: .9;
+    border: 1px solid white;
+    color: #343a40;
+}
+
+.edit-icon-button {
+    background-color:white;
+    border: 1px solid #343a40;
+    color: #343a40;
+    margin: 15px;
+}
+    
+.edit-icon-button:hover {
+    background-color:#343a40;
     border: 1px solid white;
     color: white;
 }
 
+.exit-icon-button {
+    color: #343a40;
+    margin: 0;
+    padding: 0;
+    background-color: inherit;
+    border: none;
+    font-size: 2em;
+}
+
+.exit-icon-button:hover {
+    color: gray;
+    background-color: inherit;
+}
+
+.form-bottom-save-add-button {
+    background-color: inherit;
+    border: 1px solid white;
+    color: white;
+}
+
+.form-bottom-save-add-button:hover {
+    background-color: white;
+    border: 1px solid white;
+    color: #343a40;
+}
+
+.logout-button {
+    background-color: #343a40;
+    border: 1px solid #343a40;
+    color: white;
+    padding: 10px;
+}
+
+
+.logout-button:hover {
+    background-color: inherit;
+    border: 1px solid #343a40;
+    color: #343a40;
+}
+
 .save-icon-button {
-    background-color:white;
-    border: 1px solid rgb(32, 36, 36);
-    color: rgb(32, 36, 36);
+    background-color:inherit;
+
+    border: 1px solid;
+    color: #343a40;
     margin: 15px;
 }
 
 .save-icon-button:hover {
-    background-color:rgb(32, 36, 36);
-    border: 1px solid white;
-    color: white;
-}
-
+    background-color: white;
+    border: 1px solid #343a40;
+    color: #343a40;
+} 
 
 .search-icon-button {
-    background-color:white;
-    border: 1px solid rgb(32, 36, 36);
-    color: rgb(32, 36, 36);
-    margin: 15px;
+    border:none;
+    background-color: inherit;
+    height: 50px;
+    width: 150px;
 }
-
-.search-icon-button:hover {
-    background-color:rgb(32, 36, 36);
-    border: 1px solid white;
-    color: white;
-}
-
-
-.print-icon-button {
-    background-color:white;
-    border: 1px solid rgb(32, 36, 36);
-    color: rgb(32, 36, 36);
-    margin: 15px;
-}
-
-.print-icon-button:hover {
-    background-color:rgb(32, 36, 36);
-    border: 1px solid white;
-    color: white;
-}
+*/

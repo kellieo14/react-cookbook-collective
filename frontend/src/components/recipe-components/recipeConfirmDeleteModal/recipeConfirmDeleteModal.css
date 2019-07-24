@@ -1,10 +1,42 @@
 .modal-buttons {
     display: flex;
     justify-content: center;
+    margin-bottom: 40px;
 }
-
-
 
 .modal-text {
     margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-family: 'Ruda', sans-serif;
+}
+
+.modal-image {
+    background-image: url('./heather-barnes-1493823-unsplash\ \(1\).jpg');
+
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+
+.modal-close {
+    background-color: #c0eff4;
+    height: 50px;
+}
+
+.modal-footer {
+    background-color: #c0eff4;;
+    height: 50px;
+}
+
+.modal-recipe-button {
+    margin: 10px;
+}
+
+.modal-text-div {
+    background-color: #eafdff;
+    /* background-color: #fff6ea; */
+}
+
+div.container {
+    padding: 0px;
 }

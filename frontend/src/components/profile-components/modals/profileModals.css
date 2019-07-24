@@ -1,0 +1,91 @@
+
+/* -------------------------------TRY NEXT MODAL ---------------------*/
+.try-next-li {
+    list-style: none;
+    text-transform: capitalize;
+    text-align: center;
+
+}
+
+.try-next-li a:hover {
+    list-style: none;
+    text-transform: capitalize;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.try-next-li a {
+    color: white;
+    font-weight: 100;
+    font-size: 16px;
+    font-family: 'Ruda', sans-serif;
+}
+
+ul.try-next-list {
+    padding: 0;
+}
+
+.modal-title {
+    text-align: center;
+    margin: 10px;
+    color: white;
+    font-weight:300;
+}
+
+.try-next-list hr {
+    width: 40%;
+    background-color: #ff6464
+}
+
+.profile-modal-header {
+    background-color: #ff6464;
+    height: 30px;
+    border-bottom: none;
+    border-radius: 0;
+}
+
+#profile-modal-footer {
+    background-color: #ff6464;
+    height: 30px;
+    border-top: none;
+    border-radius: 0;
+}
+
+.profile-modal-container {
+    background-color: #343a40;
+}
+
+.profile-modal-header button.close {
+    padding-top: 5px;
+}
+
+.no-recipes-message {
+    color: white;
+}
+/* ---------------------------------------------------- */
+
+
+.delete-account-modal h6 {
+    color: white;
+    font-size: 24px;
+    margin-top: 20px;
+    /* font-family: 'Ruda', sans-serif; */
+    font-weight: 300;
+}
+
+.delete-modal-button-div {
+    display: inline-flex;
+    padding: 10px;
+}
+
+.no-recipes-message hr {
+    width: 40%;
+    background-color: #ff6464;
+}
+
+.no-recipes-message h5 {
+    margin-bottom: 20px;
+    font-weight: 150;
+}
+

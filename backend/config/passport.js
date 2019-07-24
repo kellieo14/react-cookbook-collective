@@ -18,10 +18,10 @@ passport.use(new LocalStrategy({
       if (passwordsMatch) {
           return done(null, userDocument);
       } else {
-          return done('Incorrect Username / Password');
+          return done('Incorrect Username or Password');
       }
-  } catch (error) {
-      done(error)
+  } catch (error) {  
+      done('Login failed. Please try again')
   }
 }));
 

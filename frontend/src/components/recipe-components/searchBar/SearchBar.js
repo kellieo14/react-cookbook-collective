@@ -21,7 +21,7 @@ class SearchBar extends Component {
         
 
         return (
-                <div>
+                <div className='search-bar-div'>
  
                     <InputGroup className='search-bar center'>
                         {this.state.searchType === 'categories' && (

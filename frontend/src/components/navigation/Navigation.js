@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {Navbar, Nav, NavDropdown} from 'react-bootstrap';
 import { axiosGetRequest } from '../../axiosRequest';
+import { LinkContainer } from "react-router-bootstrap";
+import mixer from './mixer.png';
 import './navigation.css';
 
 
@@ -9,9 +11,10 @@ class Navigation extends Component {
     constructor(props){
         super(props);
         this.state = {
-            navExpanded: false
+            navExpanded: false, 
         }
     }
+
 
     setNavExpanded = (expanded) => {
         this.setState({ navExpanded: expanded });
@@ -22,17 +25,18 @@ class Navigation extends Component {
     }
 
     handleLogout = async (req, res) => {
-        await axiosGetRequest('logout')
+        await axiosGetRequest('logout');
         this.props.logoutUser();
-        this.setState({ navExpanded: false })
+        this.setState({ navExpanded: false });
         window.location.href='/login';
     }
 
     render() {
+
         return (
-            <Navbar onToggle={this.setNavExpanded}
-                expanded={this.state.navExpanded} className='fixed-top' expand='lg' bg='dark' variant='dark'>
-                <Navbar.Brand><Link className='navbar-link' to='/'>Kellie's Cookbook Collective</Link></Navbar.Brand>
+            <div>
+                <Navbar onToggle={this.setNavExpanded} expanded={this.state.navExpanded} className='fixed-top' expand='lg' bg='dark' variant='dark'>
+                <Navbar.Brand className='brand'><Link className='navbar-link' to='/'><img alt='stand mixer' src={mixer}></img>Cookbook Collective</Link></Navbar.Brand>
                 <Navbar.Toggle aria-controls='responsive-navbar-nav' />
                 {!this.props.user && (
                     <Navbar.Collapse id='responsive-navbar-nav'>
@@ -46,29 +50,44 @@ class Navigation extends Component {
                 {this.props.user && (
                     <Navbar.Collapse variant='dark' id='responsive-navbar-nav'>
                         <Nav className='ml-auto'>
-                        <NavDropdown title='Recipes' >
-                            <Link variant='dark' onClick={this.closeNav} className='dropdown-link' to='/recipes'>View My cookbook</Link>
-                            <NavDropdown.Divider />
-                            <Link variant='dark' onClick={this.closeNav} className='dropdown-link' to='/recipe/new'>Add Recipe</Link>
+                        <NavDropdown title='Recipes' id="collapsible-nav-dropdown" >
+                            <LinkContainer to='/recipes'>
+                                <NavDropdown.Item className='dropdown-link' onClick={this.closeNav}>Recipes</NavDropdown.Item>
+                            </LinkContainer>
+                            <LinkContainer to='/recipe/new'>
+                                <NavDropdown.Item className='dropdown-link' onClick={this.closeNav}>Add Recipe</NavDropdown.Item>
+                            </LinkContainer>                        
                         </NavDropdown>
                         </Nav>
                         <Nav className='justify-end-content'>
                             <NavDropdown  title='My Account' >
-                                <Link variant='dark' onClick={this.closeNav} className='dropdown-link' to='/'>My Account</Link>
+                                <LinkContainer to={`/profile/${this.props.user.id}`}>
+                                    <NavDropdown.Item className='dropdown-link' onClick={this.closeNav}>Profile</NavDropdown.Item>
+                                </LinkContainer>
+                                <LinkContainer to='/'>
+                                    <NavDropdown.Item className='dropdown-link' onClick={this.closeNav}>Friends</NavDropdown.Item>
+                                </LinkContainer>
                                 <NavDropdown.Divider />
-                                <Link variant='dark' onClick={this.closeNav} className='dropdown-link' to='/'>Friends</Link>
+                                <Navbar.Text className='logout dropdown-link' onClick={this.handleLogout}>Logout</Navbar.Text>
+
                             </NavDropdown>
                         </Nav>
-                        <Navbar.Text className='logout' onClick={this.handleLogout}>Logout</Navbar.Text>
-
+                      
+                        <Navbar.Text className='initial'>{this.props.user.username.charAt(0).toUpperCase()}</Navbar.Text>
+                   
                     </Navbar.Collapse>
                 )}
                 
-            </Navbar>
+                </Navbar>
+            </div>
+            
         )
     }
 }
 
 
 export default Navigation;
+
+
+
 

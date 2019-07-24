@@ -1,34 +1,104 @@
+#container-recipe-form {
+    min-height: calc(100vh - 57px);
+    overflow-y: auto;
+    position: absolute;
+    top: 57px;
+    width: 100%;
+    background-color: #343a40;
+}
+
 .recipe-header {
-    /* margin-top: 10px; */
     margin-bottom: 20px;
+    color: #97B3E7;
 }
 
-.submit-button {
-    background-color:white;
-    border: 1px solid rgb(32, 36, 36);
-    color: rgb(32, 36, 36);
-}
-
-.submit-button:hover {
-    background-color:rgb(32, 36, 36);
-    border: 1px solid white;
-    color: white;
-}
-
-.save-delete-row {
+.save-delete-row-large {
     justify-content: flex-end;
 }
+
 .submit-div {
     text-align: center;
 }
 
 .recipe-form {
-    border: 1px solid lightgray;
+    /* border: 2px solid white; */
     padding: 20px;
-    margin-bottom: 20px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    width: 90%;
+    opacity: .99;
+    border: solid #97B3E7 4px;
+    /* background-color: #c0eff4; */
+    background-color: #343a40;
+    color: #DCE5F7;
 }
 
 .button-bar {
     display: flex;
     justify-content: space-between;
+    padding-top: 10px;
+    margin-right: 20px;
 }
+
+/* .back-button {
+
+    background-color: #343a40;
+    border: 2px solid #343a40;
+    color: white;
+} */
+
+/* .back-button:hover {
+    border: 2px solid #343a40;
+    background-color: white;
+    opacity: .8;
+} */
+
+.recipe-form input.form-control {
+    background-color: inherit;
+    color: white;
+}
+
+
+.recipe-form input.form-control:focus {
+    background-color: inherit;
+    outline: none !important;
+    border:2px solid white;
+    box-shadow: 0 0 5px #c0eff4;
+}
+
+.recipe-form textarea.form-control {
+    background-color: inherit;
+    color: white;
+}
+
+.recipe-form textarea.form-control:focus {
+    outline: none !important;
+    border: 2px solid white;
+    box-shadow: 0 0 5px #c0eff4;
+    /* background-color: #c0eff4; */
+    color: white;
+}
+
+.recipe-form-hr {
+    background-color: #DCE5F7;
+    opacity: .5
+}
+
+label.form-label {
+    font-weight: 600;
+}
+
+/* SMALL SCREEN */
+@media (min-width: 768px) {
+    .save-delete-row-small {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .save-delete-row-large {
+        display: none;
+    }
+}
+

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal} from 'react-bootstrap';
+import {Modal, Col, Row, Container} from 'react-bootstrap';
 import RecipeButton from '../../buttons/RecipeButton';
 import './recipeConfirmDeleteModal.css';
 
@@ -11,17 +11,27 @@ class RecipeConfirmDeleteModal extends React.Component {
     return (
       <Modal
         {...rest}
-        size="sm"
+        // size="sm"
+        dialogClassName='modal-90w'
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header closeButton>
-            <p className='modal-text text-center'>Are you sure you want to delete the '{this.props.title}' recipe?</p>
+        <Modal.Header className='modal-close' closeButton>
         </Modal.Header>
-
-        <Modal.Footer className='modal-buttons'>
-          <RecipeButton buttonName='Yes' onClick={this.props.handleDeleteRecipe} />
-          <RecipeButton buttonName='No' onClick={this.props.onHide} />
+        <Container>
+            <Row>
+                <Col xs={5} className='modal-image'></Col>
+                <Col xs={7} className='modal-text-div'>
+                  <p className='modal-text center'>Are you sure you want to delete the '{this.props.title}' recipe?</p>
+                    <Row className='modal-buttons'>
+                      <RecipeButton  buttonName='Yes' onClick={this.props.handleDeleteRecipe} />
+                      <RecipeButton  buttonName='No' onClick={this.props.onHide} />
+                    </Row>
+                </Col>
+           </Row>
+                 
+        </Container>
+        <Modal.Footer className='modal-footer'>
         </Modal.Footer>
       </Modal>
     );
@@ -31,6 +41,10 @@ class RecipeConfirmDeleteModal extends React.Component {
 
 
   export default RecipeConfirmDeleteModal;
+
+
+
+
 
 
 

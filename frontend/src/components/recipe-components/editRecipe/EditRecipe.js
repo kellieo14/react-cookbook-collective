@@ -19,12 +19,22 @@ class EditRecipe extends Component {
         this.setState({
             recipe
         });
+        console.log(recipe)
     }
+
+    // async onSubmit(recipe) {
+    //     const { match: { params } } = this.props;
+    //     return await axios.put(`http://localhost:8081/recipes/${params.recipeId}`,
+    //     {
+    //     ...recipe
+    //     })
+    // }
 
     async onSubmit(recipe) {
         const { match: { params } } = this.props;
-        return await axios.put(`http://localhost:8081/recipes/${params.recipeId}`, {
-        ...recipe
+        await axios.put(`http://localhost:8081/recipes/${params.recipeId}`, recipe.image, recipe.tumbtacked, recipe.title, recipe.author, recipe.ingredients, recipe.directions, recipe.notes,recipe.categories,
+        {
+        // ...recipe
         })
     }
 
@@ -40,7 +50,7 @@ class EditRecipe extends Component {
             <div>
                 <RecipeForm
                     goBack={this.goBack}
-                    header={`Editing ${recipe.title} Recipe`}
+                    header={`EDITING ${recipe.title.toUpperCase()} RECIPE`}
                     recipe={recipe}
                     onSubmit={this.onSubmit}
                 />

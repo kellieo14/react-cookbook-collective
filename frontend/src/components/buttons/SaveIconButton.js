@@ -5,7 +5,7 @@ import './buttons.css';
 function SaveIconButton(props) {
     return (
         <div>
-            <Button onClick={props.onClick} className='save-icon-button'><i className='fas fa-save'></i>{props.buttonName}</Button>
+            <Button onClick={props.onClick} className={props.className}><i className={props.iconName}></i>{props.buttonName}</Button>
         </div>
     )
 }

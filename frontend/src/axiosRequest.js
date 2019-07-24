@@ -6,13 +6,11 @@ export const axiosSetup = () => {
     axios.interceptors.response.use((response)=> {
         return response;
     }, function (error) {
-        console.log(error.response);
         if (error.response.status === 401) {
-            window.location.href='/login'
+            window.location.href='/login';
             return Promise.reject(error);
         } else {
-            return
-        
+            return error.response.data.error
     }
     });
 }

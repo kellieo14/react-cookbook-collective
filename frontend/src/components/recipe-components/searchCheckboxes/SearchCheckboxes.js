@@ -27,7 +27,7 @@ class SearchCheckboxes extends Component {
 
 
     render() {
-        const categories = ['pie', 'cake', 'cheesecake', 'cupcake', 'ice cream', 'brownie', 'cookie', 'cobbler', 'chocolate', 'fruit', 'caramel', 'other' ].sort();
+        const categories = ['pie','bread', 'cake', 'cheesecake', 'cupcake', 'ice cream', 'brownie', 'cookie', 'cobbler', 'chocolate', 'fruit', 'caramel', 'other' ].sort();
         return (
             <div className='container center'>
                 <Form>

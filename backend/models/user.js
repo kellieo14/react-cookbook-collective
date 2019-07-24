@@ -13,7 +13,19 @@ const userSchema = new Schema({
     passwordHash: {
         type: String, 
         required: true
+    },    image: {
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Image'
+        }
     },
+    owner: {
+        id: {
+            type: mongoose.Schema.Types.ObjectId, 
+            ref: 'User'
+        }
+    }, 
+    image: String, 
  
 });
 

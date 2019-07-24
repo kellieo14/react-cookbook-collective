@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Container} from 'react-bootstrap';
 import { axiosGetRequest } from '../../../axiosRequest';
-import RecipeButton from '../../buttons/RecipeButton';
+import BorderBoxButtonLarge from '../../buttons/BorderBoxButtonLarge';
+import './logout.css';
 
 
 class Logout extends Component {
@@ -13,9 +14,16 @@ class Logout extends Component {
 
     render() {
         return (
-            <Container>
-            <h3>You are currently logged in as {this.props.user.username}.</h3>
-            <RecipeButton onClick={this.handleLogout} buttonName='Switch Accounts'/>
+            <Container fluid className='logout-container center'>
+                <Container className='logout-inner-container'>
+
+                    <h3 className='logout-title'>You are currently logged in as {this.props.user.username}.</h3>
+                    <div className='logout-page-button'>
+                        <BorderBoxButtonLarge buttonName='Switch Accounts' onClick={this.handleLogout} />
+                    </div>
+                
+                </Container>
+            
             </Container>
         )
     }
